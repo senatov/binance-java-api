@@ -16,7 +16,7 @@
     </licenses>
 
     <properties>
-        <com.squareup.retrofit2.version>2.4.0</com.squareup.retrofit2.version>
+        <ver.retrofit2>2.6.2</ver.retrofit2>
         <compilerArgs>--enable-preview</compilerArgs>
         <downloadJavadocs>true</downloadJavadocs>
         <downloadSources>true</downloadSources>
@@ -78,12 +78,12 @@
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>retrofit</artifactId>
-            <version>${com.squareup.retrofit2.version}</version>
+            <version>${ver.retrofit2}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-jackson</artifactId>
-            <version>${com.squareup.retrofit2.version}</version>
+            <version>${ver.retrofit2}</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
