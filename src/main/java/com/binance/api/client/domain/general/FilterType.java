@@ -1,7 +1,6 @@
 package com.binance.api.client.domain.general;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringExclude;
 
 /**
  * Filters define trading rules on a symbol or an exchange. Filters come in two forms: symbol filters and exchange filters.

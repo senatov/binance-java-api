@@ -13,277 +13,277 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MarginNewOrder {
 
-    /**
-     * Symbol to place the order on.
-     */
-    private String symbol;
+	/**
+	 * Symbol to place the order on.
+	 */
+	private String symbol;
 
-    /**
-     * Buy/Sell order side.
-     */
-    private OrderSide side;
+	/**
+	 * Buy/Sell order side.
+	 */
+	private OrderSide side;
 
-    /**
-     * Type of order.
-     */
-    private OrderType type;
+	/**
+	 * Type of order.
+	 */
+	private OrderType type;
 
-    /**
-     * Time in force to indicate how long will the order remain active.
-     */
-    private TimeInForce timeInForce;
+	/**
+	 * Time in force to indicate how long will the order remain active.
+	 */
+	private TimeInForce timeInForce;
 
-    /**
-     * Quantity.
-     */
-    private String quantity;
+	/**
+	 * Quantity.
+	 */
+	private String quantity;
 
-    /**
-     * Quote quantity.
-     */
-    private String quoteOrderQty;
+	/**
+	 * Quote quantity.
+	 */
+	private String quoteOrderQty;
 
-    /**
-     * Price.
-     */
-    private String price;
+	/**
+	 * Price.
+	 */
+	private String price;
 
-    /**
-     * A unique id for the order. Automatically generated if not sent.
-     */
-    private String newClientOrderId;
+	/**
+	 * A unique id for the order. Automatically generated if not sent.
+	 */
+	private String newClientOrderId;
 
-    /**
-     * Used with stop orders.
-     */
-    private String stopPrice;
+	/**
+	 * Used with stop orders.
+	 */
+	private String stopPrice;
 
-    /**
-     * Used with iceberg orders.
-     */
-    private String icebergQty;
+	/**
+	 * Used with iceberg orders.
+	 */
+	private String icebergQty;
 
-    /**
-     * Set the response JSON. ACK, RESULT, or FULL; default: RESULT.
-     */
-    private NewOrderResponseType newOrderRespType;
+	/**
+	 * Set the response JSON. ACK, RESULT, or FULL; default: RESULT.
+	 */
+	private NewOrderResponseType newOrderRespType;
 
-    /**
-     * Set the margin order side-effect. NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY; default: NO_SIDE_EFFECT.
-     */
-    private SideEffectType sideEffectType;
+	/**
+	 * Set the margin order side-effect. NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY; default: NO_SIDE_EFFECT.
+	 */
+	private SideEffectType sideEffectType;
 
-    /**
-     * Receiving window.
-     */
-    private Long recvWindow;
+	/**
+	 * Receiving window.
+	 */
+	private Long recvWindow;
 
-    /**
-     * Order timestamp.
-     */
-    private long timestamp;
+	/**
+	 * Order timestamp.
+	 */
+	private long timestamp;
 
-    /**
-     * Creates a new order with all required parameters.
-     */
-    public MarginNewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity) {
-        this.symbol = symbol;
-        this.side = side;
-        this.type = type;
-        this.timeInForce = timeInForce;
-        this.quantity = quantity;
-        this.newOrderRespType = NewOrderResponseType.RESULT;
-        this.timestamp = System.currentTimeMillis();
-        this.recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
-    }
+	/**
+	 * Creates a new order with all required parameters plus price, which is optional for MARKET orders.
+	 */
+	public MarginNewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String price) {
+		this(symbol, side, type, timeInForce, quantity);
+		this.price = price;
+	}
 
-    /**
-     * Creates a new order with all required parameters plus price, which is optional for MARKET orders.
-     */
-    public MarginNewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String price) {
-        this(symbol, side, type, timeInForce, quantity);
-        this.price = price;
-    }
+	/**
+	 * Creates a new order with all required parameters.
+	 */
+	public MarginNewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity) {
+		this.symbol = symbol;
+		this.side = side;
+		this.type = type;
+		this.timeInForce = timeInForce;
+		this.quantity = quantity;
+		newOrderRespType = NewOrderResponseType.RESULT;
+		timestamp = System.currentTimeMillis();
+		recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
+	}
 
-    public String getSymbol() {
-        return symbol;
-    }
+	/**
+	 * Places a MARKET buy order for the given <code>quantity</code>.
+	 *
+	 * @return a new order which is pre-configured with MARKET as the order type and BUY as the order side.
+	 */
+	public static MarginNewOrder marketBuy(String symbol, String quantity) {
+		return new MarginNewOrder(symbol, OrderSide.BUY, OrderType.MARKET, null, quantity);
+	}
 
-    public MarginNewOrder symbol(String symbol) {
-        this.symbol = symbol;
-        return this;
-    }
+	/**
+	 * Places a MARKET sell order for the given <code>quantity</code>.
+	 *
+	 * @return a new order which is pre-configured with MARKET as the order type and SELL as the order side.
+	 */
+	public static MarginNewOrder marketSell(String symbol, String quantity) {
+		return new MarginNewOrder(symbol, OrderSide.SELL, OrderType.MARKET, null, quantity);
+	}
 
-    public OrderSide getSide() {
-        return side;
-    }
+	/**
+	 * Places a LIMIT buy order for the given <code>quantity</code> and <code>price</code>.
+	 *
+	 * @return a new order which is pre-configured with LIMIT as the order type and BUY as the order side.
+	 */
+	public static MarginNewOrder limitBuy(String symbol, TimeInForce timeInForce, String quantity, String price) {
+		return new MarginNewOrder(symbol, OrderSide.BUY, OrderType.LIMIT, timeInForce, quantity, price);
+	}
 
-    public MarginNewOrder side(OrderSide side) {
-        this.side = side;
-        return this;
-    }
+	/**
+	 * Places a LIMIT sell order for the given <code>quantity</code> and <code>price</code>.
+	 *
+	 * @return a new order which is pre-configured with LIMIT as the order type and SELL as the order side.
+	 */
+	public static MarginNewOrder limitSell(String symbol, TimeInForce timeInForce, String quantity, String price) {
+		return new MarginNewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, price);
+	}
 
-    public OrderType getType() {
-        return type;
-    }
+	public String getSymbol() {
+		return symbol;
+	}
 
-    public MarginNewOrder type(OrderType type) {
-        this.type = type;
-        return this;
-    }
+	public MarginNewOrder symbol(String symbol) {
+		this.symbol = symbol;
+		return this;
+	}
 
-    public TimeInForce getTimeInForce() {
-        return timeInForce;
-    }
+	public OrderSide getSide() {
+		return side;
+	}
 
-    public MarginNewOrder timeInForce(TimeInForce timeInForce) {
-        this.timeInForce = timeInForce;
-        return this;
-    }
+	public MarginNewOrder side(OrderSide side) {
+		this.side = side;
+		return this;
+	}
 
-    public String getQuantity() {
-        return quantity;
-    }
+	public OrderType getType() {
+		return type;
+	}
 
-    public MarginNewOrder quantity(String quantity) {
-        this.quantity = quantity;
-        return this;
-    }
+	public MarginNewOrder type(OrderType type) {
+		this.type = type;
+		return this;
+	}
 
-    public String getQuoteOrderQty() {
-        return quoteOrderQty;
-    }
+	public TimeInForce getTimeInForce() {
+		return timeInForce;
+	}
 
-    public MarginNewOrder quoteOrderQty(String quoteOrderQty) {
-        this.quoteOrderQty = quoteOrderQty;
-        return this;
-    }
+	public MarginNewOrder timeInForce(TimeInForce timeInForce) {
+		this.timeInForce = timeInForce;
+		return this;
+	}
 
-    public String getPrice() {
-        return price;
-    }
+	public String getQuantity() {
+		return quantity;
+	}
 
-    public MarginNewOrder price(String price) {
-        this.price = price;
-        return this;
-    }
+	public MarginNewOrder quantity(String quantity) {
+		this.quantity = quantity;
+		return this;
+	}
 
-    public String getNewClientOrderId() {
-        return newClientOrderId;
-    }
+	public String getQuoteOrderQty() {
+		return quoteOrderQty;
+	}
 
-    public MarginNewOrder newClientOrderId(String newClientOrderId) {
-        this.newClientOrderId = newClientOrderId;
-        return this;
-    }
+	public MarginNewOrder quoteOrderQty(String quoteOrderQty) {
+		this.quoteOrderQty = quoteOrderQty;
+		return this;
+	}
 
-    public String getStopPrice() {
-        return stopPrice;
-    }
+	public String getPrice() {
+		return price;
+	}
 
-    public MarginNewOrder stopPrice(String stopPrice) {
-        this.stopPrice = stopPrice;
-        return this;
-    }
+	public MarginNewOrder price(String price) {
+		this.price = price;
+		return this;
+	}
 
-    public String getIcebergQty() {
-        return icebergQty;
-    }
+	public String getNewClientOrderId() {
+		return newClientOrderId;
+	}
 
-    public MarginNewOrder icebergQty(String icebergQty) {
-        this.icebergQty = icebergQty;
-        return this;
-    }
+	public MarginNewOrder newClientOrderId(String newClientOrderId) {
+		this.newClientOrderId = newClientOrderId;
+		return this;
+	}
 
-    public NewOrderResponseType getNewOrderRespType() {
-        return newOrderRespType;
-    }
+	public String getStopPrice() {
+		return stopPrice;
+	}
 
-    public MarginNewOrder newOrderRespType(NewOrderResponseType newOrderRespType) {
-        this.newOrderRespType = newOrderRespType;
-        return this;
-    }
+	public MarginNewOrder stopPrice(String stopPrice) {
+		this.stopPrice = stopPrice;
+		return this;
+	}
 
-    public SideEffectType getSideEffectType() {
-        return sideEffectType;
-    }
+	public String getIcebergQty() {
+		return icebergQty;
+	}
 
-    public MarginNewOrder sideEffectType(SideEffectType sideEffectType) {
-        this.sideEffectType = sideEffectType;
-        return this;
-    }
+	public MarginNewOrder icebergQty(String icebergQty) {
+		this.icebergQty = icebergQty;
+		return this;
+	}
 
-    public Long getRecvWindow() {
-        return recvWindow;
-    }
+	public NewOrderResponseType getNewOrderRespType() {
+		return newOrderRespType;
+	}
 
-    public MarginNewOrder recvWindow(Long recvWindow) {
-        this.recvWindow = recvWindow;
-        return this;
-    }
+	public MarginNewOrder newOrderRespType(NewOrderResponseType newOrderRespType) {
+		this.newOrderRespType = newOrderRespType;
+		return this;
+	}
 
-    public long getTimestamp() {
-        return timestamp;
-    }
+	public SideEffectType getSideEffectType() {
+		return sideEffectType;
+	}
 
-    public MarginNewOrder timestamp(long timestamp) {
-        this.timestamp = timestamp;
-        return this;
-    }
+	public MarginNewOrder sideEffectType(SideEffectType sideEffectType) {
+		this.sideEffectType = sideEffectType;
+		return this;
+	}
 
-    /**
-     * Places a MARKET buy order for the given <code>quantity</code>.
-     *
-     * @return a new order which is pre-configured with MARKET as the order type and BUY as the order side.
-     */
-    public static MarginNewOrder marketBuy(String symbol, String quantity) {
-        return new MarginNewOrder(symbol, OrderSide.BUY, OrderType.MARKET, null, quantity);
-    }
+	public Long getRecvWindow() {
+		return recvWindow;
+	}
 
-    /**
-     * Places a MARKET sell order for the given <code>quantity</code>.
-     *
-     * @return a new order which is pre-configured with MARKET as the order type and SELL as the order side.
-     */
-    public static MarginNewOrder marketSell(String symbol, String quantity) {
-        return new MarginNewOrder(symbol, OrderSide.SELL, OrderType.MARKET, null, quantity);
-    }
+	public MarginNewOrder recvWindow(Long recvWindow) {
+		this.recvWindow = recvWindow;
+		return this;
+	}
 
-    /**
-     * Places a LIMIT buy order for the given <code>quantity</code> and <code>price</code>.
-     *
-     * @return a new order which is pre-configured with LIMIT as the order type and BUY as the order side.
-     */
-    public static MarginNewOrder limitBuy(String symbol, TimeInForce timeInForce, String quantity, String price) {
-        return new MarginNewOrder(symbol, OrderSide.BUY, OrderType.LIMIT, timeInForce, quantity, price);
-    }
+	public long getTimestamp() {
+		return timestamp;
+	}
 
-    /**
-     * Places a LIMIT sell order for the given <code>quantity</code> and <code>price</code>.
-     *
-     * @return a new order which is pre-configured with LIMIT as the order type and SELL as the order side.
-     */
-    public static MarginNewOrder limitSell(String symbol, TimeInForce timeInForce, String quantity, String price) {
-        return new MarginNewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, price);
-    }
+	public MarginNewOrder timestamp(long timestamp) {
+		this.timestamp = timestamp;
+		return this;
+	}
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-                .append("symbol", symbol)
-                .append("side", side)
-                .append("type", type)
-                .append("timeInForce", timeInForce)
-                .append("quantity", quantity)
-                .append("quoteOrderQty", quoteOrderQty)
-                .append("price", price)
-                .append("newClientOrderId", newClientOrderId)
-                .append("stopPrice", stopPrice)
-                .append("icebergQty", icebergQty)
-                .append("newOrderRespType", newOrderRespType)
-                .append("sideEffectType", sideEffectType)
-                .append("recvWindow", recvWindow)
-                .append("timestamp", timestamp)
-                .toString();
-    }
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+				.append("symbol", symbol)
+				.append("side", side)
+				.append("type", type)
+				.append("timeInForce", timeInForce)
+				.append("quantity", quantity)
+				.append("quoteOrderQty", quoteOrderQty)
+				.append("price", price)
+				.append("newClientOrderId", newClientOrderId)
+				.append("stopPrice", stopPrice)
+				.append("icebergQty", icebergQty)
+				.append("newOrderRespType", newOrderRespType)
+				.append("sideEffectType", sideEffectType)
+				.append("recvWindow", recvWindow)
+				.append("timestamp", timestamp)
+				.toString();
+	}
 }

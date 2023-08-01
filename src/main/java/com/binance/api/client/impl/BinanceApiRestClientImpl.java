@@ -3,11 +3,39 @@ package com.binance.api.client.impl;
 import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.config.BinanceApiConfig;
 import com.binance.api.client.constant.BinanceApiConstants;
-import com.binance.api.client.domain.account.*;
-import com.binance.api.client.domain.account.request.*;
+import com.binance.api.client.domain.account.Account;
+import com.binance.api.client.domain.account.DepositAddress;
+import com.binance.api.client.domain.account.DepositHistory;
+import com.binance.api.client.domain.account.DustTransferResponse;
+import com.binance.api.client.domain.account.NewOCO;
+import com.binance.api.client.domain.account.NewOCOResponse;
+import com.binance.api.client.domain.account.NewOrder;
+import com.binance.api.client.domain.account.NewOrderResponse;
+import com.binance.api.client.domain.account.Order;
+import com.binance.api.client.domain.account.OrderList;
+import com.binance.api.client.domain.account.SubAccountTransfer;
+import com.binance.api.client.domain.account.Trade;
+import com.binance.api.client.domain.account.TradeHistoryItem;
+import com.binance.api.client.domain.account.WithdrawHistory;
+import com.binance.api.client.domain.account.WithdrawResult;
+import com.binance.api.client.domain.account.request.AllOrderListRequest;
+import com.binance.api.client.domain.account.request.AllOrdersRequest;
+import com.binance.api.client.domain.account.request.CancelOrderListRequest;
+import com.binance.api.client.domain.account.request.CancelOrderListResponse;
+import com.binance.api.client.domain.account.request.CancelOrderRequest;
+import com.binance.api.client.domain.account.request.CancelOrderResponse;
+import com.binance.api.client.domain.account.request.OrderListStatusRequest;
+import com.binance.api.client.domain.account.request.OrderRequest;
+import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.ExchangeInfo;
-import com.binance.api.client.domain.market.*;
+import com.binance.api.client.domain.market.AggTrade;
+import com.binance.api.client.domain.market.BookTicker;
+import com.binance.api.client.domain.market.Candlestick;
+import com.binance.api.client.domain.market.CandlestickInterval;
+import com.binance.api.client.domain.market.OrderBook;
+import com.binance.api.client.domain.market.TickerPrice;
+import com.binance.api.client.domain.market.TickerStatistics;
 import retrofit2.Call;
 
 import java.util.List;
@@ -79,7 +107,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 
 	@Override
 	public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval, Integer limit,
-			Long startTime, Long endTime) {
+	                                            Long startTime, Long endTime) {
 		return executeSync(
 				binanceApiService.getCandlestickBars(symbol, interval.getIntervalId(), limit, startTime, endTime));
 	}
@@ -100,13 +128,13 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	}
 
 	@Override
-	public TickerPrice getPrice(String symbol) {
-		return executeSync(binanceApiService.getLatestPrice(symbol));
+	public List<TickerPrice> getAllPrices() {
+		return executeSync(binanceApiService.getLatestPrices());
 	}
 
 	@Override
-	public List<TickerPrice> getAllPrices() {
-		return executeSync(binanceApiService.getLatestPrices());
+	public TickerPrice getPrice(String symbol) {
+		return executeSync(binanceApiService.getLatestPrice(symbol));
 	}
 
 	@Override
@@ -116,7 +144,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 
 	@Override
 	public NewOrderResponse newOrder(NewOrder order) {
-		final Call<NewOrderResponse> call;
+		Call<NewOrderResponse> call;
 		if (order.getQuoteOrderQty() == null) {
 			call = binanceApiService.newOrder(order.getSymbol(), order.getSide(), order.getType(),
 					order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(),

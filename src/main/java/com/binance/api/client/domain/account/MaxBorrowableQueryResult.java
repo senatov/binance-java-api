@@ -2,8 +2,6 @@ package com.binance.api.client.domain.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.List;
-
 /**
  * Max Borrow Query Result
  *
@@ -12,20 +10,20 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MaxBorrowableQueryResult {
 
-  private String amount;
+	private String amount;
 
-  public String getAmount() {
-    return amount;
-  }
+	public String getAmount() {
+		return amount;
+	}
 
-  public void setAmount(String amount) {
-    this.amount = amount;
-  }
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
 
-  @Override
-  public String toString() {
-    return "MaxBorrowQueryResult{" +
-            "amount='" + amount + '\'' +
-            '}';
-  }
+	@Override
+	public String toString() {
+		return "MaxBorrowQueryResult{" +
+				"amount='" + amount + '\'' +
+				'}';
+	}
 }

@@ -4,99 +4,99 @@ import java.util.Map;
 
 public class Liquidity {
 
-    private String poolId;
-    private String poolName;
-    private Long updateTime;
-    private Map<String, String> liquidity;
-    private Share share;
+	private String poolId;
+	private String poolName;
+	private Long updateTime;
+	private Map<String, String> liquidity;
+	private Share share;
 
-    public String getPoolId() {
-        return poolId;
-    }
+	public String getPoolId() {
+		return poolId;
+	}
 
-    public void setPoolId(String poolId) {
-        this.poolId = poolId;
-    }
+	public void setPoolId(String poolId) {
+		this.poolId = poolId;
+	}
 
-    public String getPoolName() {
-        return poolName;
-    }
+	public String getPoolName() {
+		return poolName;
+	}
 
-    public void setPoolName(String poolName) {
-        this.poolName = poolName;
-    }
+	public void setPoolName(String poolName) {
+		this.poolName = poolName;
+	}
 
-    public Long getUpdateTime() {
-        return updateTime;
-    }
+	public Long getUpdateTime() {
+		return updateTime;
+	}
 
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
-    }
+	public void setUpdateTime(Long updateTime) {
+		this.updateTime = updateTime;
+	}
 
-    public Map<String, String> getLiquidity() {
-        return liquidity;
-    }
+	public Map<String, String> getLiquidity() {
+		return liquidity;
+	}
 
-    public void setLiquidity(Map<String, String> liquidity) {
-        this.liquidity = liquidity;
-    }
+	public void setLiquidity(Map<String, String> liquidity) {
+		this.liquidity = liquidity;
+	}
 
-    public Share getShare() {
-        return share;
-    }
+	public Share getShare() {
+		return share;
+	}
 
-    public void setShare(Share share) {
-        this.share = share;
-    }
+	public void setShare(Share share) {
+		this.share = share;
+	}
 
-    public static class Share {
-        private double shareAmount;
-        private double sharePercentage;
-        private Map<String, String> asset;
+	@Override
+	public String toString() {
+		return "Liquidity{" +
+				"poolId=" + poolId +
+				", poolName='" + poolName + '\'' +
+				", updateTime=" + updateTime +
+				", liquidity=" + liquidity +
+				", share=" + share +
+				'}';
+	}
 
-        public double getShareAmount() {
-            return shareAmount;
-        }
+	public static class Share {
+		private double shareAmount;
+		private double sharePercentage;
+		private Map<String, String> asset;
 
-        public void setShareAmount(double shareAmount) {
-            this.shareAmount = shareAmount;
-        }
+		public double getShareAmount() {
+			return shareAmount;
+		}
 
-        public double getSharePercentage() {
-            return sharePercentage;
-        }
+		public void setShareAmount(double shareAmount) {
+			this.shareAmount = shareAmount;
+		}
 
-        public void setSharePercentage(double sharePercentage) {
-            this.sharePercentage = sharePercentage;
-        }
+		public double getSharePercentage() {
+			return sharePercentage;
+		}
 
-        public Map<String, String> getAsset() {
-            return asset;
-        }
+		public void setSharePercentage(double sharePercentage) {
+			this.sharePercentage = sharePercentage;
+		}
 
-        public void setAsset(Map<String, String> asset) {
-            this.asset = asset;
-        }
+		public Map<String, String> getAsset() {
+			return asset;
+		}
 
-        @Override
-        public String toString() {
-            return "Share{" +
-                    "shareAmount=" + shareAmount +
-                    ", sharePercentage=" + sharePercentage +
-                    ", asset=" + asset +
-                    '}';
-        }
-    }
+		public void setAsset(Map<String, String> asset) {
+			this.asset = asset;
+		}
 
-    @Override
-    public String toString() {
-        return "Liquidity{" +
-                "poolId=" + poolId +
-                ", poolName='" + poolName + '\'' +
-                ", updateTime=" + updateTime +
-                ", liquidity=" + liquidity +
-                ", share=" + share +
-                '}';
-    }
+		@Override
+		public String toString() {
+			return "Share{" +
+					"shareAmount=" + shareAmount +
+					", sharePercentage=" + sharePercentage +
+					", asset=" + asset +
+					'}';
+		}
+	}
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.binance.api</groupId>
     <artifactId>binance-api-client</artifactId>
-    <version>1.0.1.1</version>
+    <version>1.0.1.2</version>
 
     <licenses>
         <license>
@@ -16,12 +16,14 @@
     </licenses>
 
     <properties>
-        <ver.retrofit2>2.6.2</ver.retrofit2>
+        <ver.retrofit2>2.9.0</ver.retrofit2>
         <compilerArgs>--enable-preview</compilerArgs>
         <downloadJavadocs>true</downloadJavadocs>
         <downloadSources>true</downloadSources>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
         <failOnNoGitDirectory>false</failOnNoGitDirectory>
-        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -108,10 +110,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
+                <version>3.11.0</version>
             </plugin>
         </plugins>
     </build>

@@ -16,43 +16,40 @@ import java.io.IOException;
  */
 public class BinanceApiWebSocketListener<T> extends WebSocketListener {
 
-  private BinanceApiCallback<T> callback;
+	private static final ObjectMapper mapper = new ObjectMapper();
+	private final ObjectReader objectReader;
+	private BinanceApiCallback<T> callback;
+	private boolean closing = false;
 
-  private static final ObjectMapper mapper = new ObjectMapper();
+	public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, Class<T> eventClass) {
+		this.callback = callback;
+		objectReader = mapper.readerFor(eventClass);
+	}
 
-  private final ObjectReader objectReader;
+	public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, TypeReference<T> eventTypeReference) {
+		this.callback = callback;
+		objectReader = mapper.readerFor(eventTypeReference);
+	}
 
-  private boolean closing = false;
+	@Override
+	public void onMessage(WebSocket webSocket, String text) {
+		try {
+			T event = objectReader.readValue(text);
+			callback.onResponse(event);
+		} catch (IOException e) {
+			throw new BinanceApiException(e);
+		}
+	}
 
-  public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, Class<T> eventClass) {
-    this.callback = callback;
-    this.objectReader = mapper.readerFor(eventClass);
-  }
+	@Override
+	public void onClosing(WebSocket webSocket, int code, String reason) {
+		closing = true;
+	}
 
-  public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, TypeReference<T> eventTypeReference) {
-    this.callback = callback;
-    this.objectReader = mapper.readerFor(eventTypeReference);
-  }
-
-  @Override
-  public void onMessage(WebSocket webSocket, String text) {
-    try {
-      T event = objectReader.readValue(text);
-      callback.onResponse(event);
-    } catch (IOException e) {
-      throw new BinanceApiException(e);
-    }
-  }
-
-  @Override
-  public void onClosing(final WebSocket webSocket, final int code, final String reason) {
-    closing = true;
-  }
-
-  @Override
-  public void onFailure(WebSocket webSocket, Throwable t, Response response) {
-    if (!closing) {
-      callback.onFailure(t);
-    }
-  }
+	@Override
+	public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+		if (!closing) {
+			callback.onFailure(t);
+		}
+	}
 }

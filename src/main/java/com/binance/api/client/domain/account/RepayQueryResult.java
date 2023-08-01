@@ -12,30 +12,30 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RepayQueryResult {
 
-  private int total;
-  private List<Repay> rows;
+	private int total;
+	private List<Repay> rows;
 
-  public int getTotal() {
-    return total;
-  }
+	public int getTotal() {
+		return total;
+	}
 
-  public void setTotal(int total) {
-    this.total = total;
-  }
+	public void setTotal(int total) {
+		this.total = total;
+	}
 
-  public List<Repay> getRows() {
-    return rows;
-  }
+	public List<Repay> getRows() {
+		return rows;
+	}
 
-  public void setRows(List<Repay> rows) {
-    this.rows = rows;
-  }
+	public void setRows(List<Repay> rows) {
+		this.rows = rows;
+	}
 
-  @Override
-  public String toString() {
-    return "RepayQueryResult{" +
-            "total=" + total +
-            ", rows=" + rows +
-            '}';
-  }
+	@Override
+	public String toString() {
+		return "RepayQueryResult{" +
+				"total=" + total +
+				", rows=" + rows +
+				'}';
+	}
 }

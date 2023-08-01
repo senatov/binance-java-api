@@ -5,14 +5,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum SwapStatus {
-    PENDING,
-    SUCCESS,
-    FAILED;
+	PENDING,
+	SUCCESS,
+	FAILED;
 
-    @JsonValue
-    public int toValue() {
-        return ordinal();
-    }
+	@JsonValue
+	public int toValue() {
+		return ordinal();
+	}
 }
-
-

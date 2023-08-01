@@ -10,8 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum SideEffectType {
-    NO_SIDE_EFFECT,
-    MARGIN_BUY,
-    AUTO_REPAY
+	NO_SIDE_EFFECT,
+	MARGIN_BUY,
+	AUTO_REPAY
 }
-
