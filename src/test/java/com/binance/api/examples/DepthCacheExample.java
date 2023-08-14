@@ -51,21 +51,17 @@ public class DepthCacheExample {
 
 	public DepthCacheExample(String symbol) {
 		this.symbol = symbol;
-
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance();
 		wsClient = factory.newWebSocketClient();
 		restClient = factory.newRestClient();
-
 		initialize();
 	}
 
 	private void initialize() {
 		// 1. Subscribe to depth events and cache any events that are received.
 		List<DepthEvent> pendingDeltas = startDepthEventStreaming();
-
 		// 2. Get a snapshot from the rest endpoint and use it to build your initial depth cache.
 		initializeDepthCache();
-
 		// 3. & 4. handled in here.
 		applyPendingDeltas(pendingDeltas);
 	}
@@ -77,9 +73,7 @@ public class DepthCacheExample {
 	private List<DepthEvent> startDepthEventStreaming() {
 		List<DepthEvent> pendingDeltas = new CopyOnWriteArrayList<>();
 		wsCallback.setHandler(pendingDeltas::add);
-
 		webSocket = wsClient.onDepthEvent(symbol.toLowerCase(), wsCallback);
-
 		return pendingDeltas;
 	}
 
@@ -88,15 +82,12 @@ public class DepthCacheExample {
 	 */
 	private void initializeDepthCache() {
 		OrderBook orderBook = restClient.getOrderBook(symbol.toUpperCase(), 10);
-
 		lastUpdateId = orderBook.getLastUpdateId();
-
 		NavigableMap<BigDecimal, BigDecimal> asks = new TreeMap<>(Comparator.reverseOrder());
 		for (OrderBookEntry ask : orderBook.getAsks()) {
 			asks.put(new BigDecimal(ask.getPrice()), new BigDecimal(ask.getQty()));
 		}
 		depthCache.put(ASKS, asks);
-
 		NavigableMap<BigDecimal, BigDecimal> bids = new TreeMap<>(Comparator.reverseOrder());
 		for (OrderBookEntry bid : orderBook.getBids()) {
 			bids.put(new BigDecimal(bid.getPrice()), new BigDecimal(bid.getQty()));
@@ -117,21 +108,17 @@ public class DepthCacheExample {
 				printDepthCache();
 			}
 		};
-
 		Consumer<DepthEvent> drainPending = newEvent -> {
 			pendingDeltas.add(newEvent);
-
 			// 3. Apply any deltas received on the web socket that have an update-id indicating they come
 			// after the snapshot.
 			pendingDeltas.stream()
 					.filter(
 							e -> e.getFinalUpdateId() > lastUpdateId) // Ignore any updates before the snapshot
 					.forEach(updateOrderBook);
-
 			// 4. Start applying any newly received depth events to the depth cache.
 			wsCallback.setHandler(updateOrderBook);
 		};
-
 		wsCallback.setHandler(drainPending);
 	}
 
@@ -144,7 +131,7 @@ public class DepthCacheExample {
 		for (OrderBookEntry orderBookDelta : orderBookDeltas) {
 			BigDecimal price = new BigDecimal(orderBookDelta.getPrice());
 			BigDecimal qty = new BigDecimal(orderBookDelta.getQty());
-			if (qty.compareTo(BigDecimal.ZERO) == 0) {
+			if (0 == qty.compareTo(BigDecimal.ZERO)) {
 				// qty=0 means remove this level
 				lastOrderBookEntries.remove(price);
 			} else {
@@ -227,7 +214,6 @@ public class DepthCacheExample {
 		@Override
 		public void onFailure(Throwable cause) {
 			System.out.println("WS connection failed. Reconnecting. cause:" + cause.getMessage());
-
 			initialize();
 		}
 

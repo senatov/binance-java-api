@@ -75,7 +75,7 @@ public class Trade {
 
 	@JsonSetter("tradeId")
 	public void setTradeId(Long id) {
-		if (this.id == null) {
+		if (null == this.id) {
 			setId(id);
 		}
 	}

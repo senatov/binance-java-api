@@ -19,7 +19,6 @@ public class OrderBookEntryDeserializer extends JsonDeserializer<OrderBookEntry>
 		JsonNode node = oc.readTree(jp);
 		String price = node.get(0).asText();
 		String qty = node.get(1).asText();
-
 		OrderBookEntry orderBookEntry = new OrderBookEntry();
 		orderBookEntry.setPrice(price);
 		orderBookEntry.setQty(qty);

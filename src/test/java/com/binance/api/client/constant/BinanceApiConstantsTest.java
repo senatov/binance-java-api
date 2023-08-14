@@ -26,9 +26,7 @@ public class BinanceApiConstantsTest {
 
 	@BeforeClass
 	public static void setUpClass() {
-
 		DEFAULT_TO_STRING_BUILDER_STYLE = BinanceApiConstants.TO_STRING_BUILDER_STYLE;
-
 		candlestickRaw = "[\n"
 				+ "    1499040000000,\n"
 				+ "        \"0.01634790\",\n"
@@ -44,7 +42,6 @@ public class BinanceApiConstantsTest {
 				+ "        \"17928899.62484339\"\n"
 				+ "        ]";
 		ObjectMapper mapper = new ObjectMapper();
-
 		try {
 			candlestick = mapper.readValue(candlestickRaw, Candlestick.class);
 		} catch (IOException e) {
@@ -61,19 +58,15 @@ public class BinanceApiConstantsTest {
 	public void testToStringBuilderStyleChange() {
 		String binaceApiDefaultStyle = "Candlestick[openTime=1499040000000,open=0.01634790,high=0.80000000,low=0.01575800,close=0.01577100,volume=148976.11427815,closeTime=1499644799999,quoteAssetVolume=2434.19055334,numberOfTrades=308,takerBuyBaseAssetVolume=1756.87402397,takerBuyQuoteAssetVolume=28.46694368]";
 		assertEquals(candlestick.toString(), binaceApiDefaultStyle);
-
 		BinanceApiConstants.TO_STRING_BUILDER_STYLE = ToStringStyle.JSON_STYLE;
 		String jsonSyle = "{\"openTime\":1499040000000,\"open\":\"0.01634790\",\"high\":\"0.80000000\",\"low\":\"0.01575800\",\"close\":\"0.01577100\",\"volume\":\"148976.11427815\",\"closeTime\":1499644799999,\"quoteAssetVolume\":\"2434.19055334\",\"numberOfTrades\":308,\"takerBuyBaseAssetVolume\":\"1756.87402397\",\"takerBuyQuoteAssetVolume\":\"28.46694368\"}";
 		assertEquals(candlestick.toString(), jsonSyle);
-
 		BinanceApiConstants.TO_STRING_BUILDER_STYLE = ToStringStyle.NO_CLASS_NAME_STYLE;
 		String noClassNameSyle = "[openTime=1499040000000,open=0.01634790,high=0.80000000,low=0.01575800,close=0.01577100,volume=148976.11427815,closeTime=1499644799999,quoteAssetVolume=2434.19055334,numberOfTrades=308,takerBuyBaseAssetVolume=1756.87402397,takerBuyQuoteAssetVolume=28.46694368]";
 		assertEquals(candlestick.toString(), noClassNameSyle);
-
 		BinanceApiConstants.TO_STRING_BUILDER_STYLE = ToStringStyle.SHORT_PREFIX_STYLE;
 		String shortPrefixSyle = "Candlestick[openTime=1499040000000,open=0.01634790,high=0.80000000,low=0.01575800,close=0.01577100,volume=148976.11427815,closeTime=1499644799999,quoteAssetVolume=2434.19055334,numberOfTrades=308,takerBuyBaseAssetVolume=1756.87402397,takerBuyQuoteAssetVolume=28.46694368]";
 		assertEquals(candlestick.toString(), shortPrefixSyle);
-
 		BinanceApiConstants.TO_STRING_BUILDER_STYLE = ToStringStyle.SIMPLE_STYLE;
 		String simpleSyle = "1499040000000,0.01634790,0.80000000,0.01575800,0.01577100,148976.11427815,1499644799999,2434.19055334,308,1756.87402397,28.46694368";
 		assertEquals(candlestick.toString(), simpleSyle);

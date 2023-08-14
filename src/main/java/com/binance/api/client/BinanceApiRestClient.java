@@ -40,7 +40,6 @@ import java.util.List;
  * Binance API facade, supporting synchronous/blocking access Binance's REST API.
  */
 public interface BinanceApiRestClient {
-
 	// General endpoints
 
 	/**
@@ -64,7 +63,6 @@ public interface BinanceApiRestClient {
 	 * @return All the supported assets and whether or not they can be withdrawn.
 	 */
 	List<Asset> getAllAssets();
-
 	// Market Data endpoints
 
 	/**
@@ -161,7 +159,6 @@ public interface BinanceApiRestClient {
 	 * Get best price/qty on the order book for all symbols.
 	 */
 	List<BookTicker> getBookTickers();
-
 	// Account endpoints
 
 	/**
@@ -320,7 +317,6 @@ public interface BinanceApiRestClient {
 	 * @return deposit address for a given asset.
 	 */
 	DepositAddress getDepositAddress(String asset);
-
 	// User stream endpoints
 
 	/**

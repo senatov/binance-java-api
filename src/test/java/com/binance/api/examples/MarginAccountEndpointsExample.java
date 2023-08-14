@@ -17,17 +17,14 @@ public class MarginAccountEndpointsExample {
 	public static void main(String[] args) {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("YOUR_API_KEY", "YOUR_SECRET");
 		BinanceApiMarginRestClient client = factory.newMarginRestClient();
-
 		// Get account balances
 		MarginAccount marginAccount = client.getAccount();
 		System.out.println(marginAccount.getUserAssets());
 		System.out.println(marginAccount.getAssetBalance("ETH"));
 		System.out.println(marginAccount.getMarginLevel());
-
 		// Get list of trades
 		List<Trade> myTrades = client.getMyTrades("NEOETH");
 		System.out.println(myTrades);
-
 		// Transfer, borrow, repay
 		MarginTransaction spotToMargin = client.transfer("USDT", "1", TransferType.SPOT_TO_MARGIN);
 		System.out.println(spotToMargin.getTranId());

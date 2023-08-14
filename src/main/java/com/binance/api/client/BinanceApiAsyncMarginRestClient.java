@@ -19,7 +19,6 @@ import java.util.List;
  * Binance API façade, supporting asynchronous/non-blocking access Binance's Margin REST API.
  */
 public interface BinanceApiAsyncMarginRestClient {
-
 	// Account endpoints
 
 	/**
@@ -67,12 +66,10 @@ public interface BinanceApiAsyncMarginRestClient {
 	 * @param symbol symbol to get trades from
 	 */
 	void getMyTrades(String symbol, BinanceApiCallback<List<Trade>> callback);
-
 	// User stream endpoints
 
 	/**
 	 * Start a new user data stream (async).
-	 *
 	 */
 	void startUserDataStream(BinanceApiCallback<ListenKey> callback);
 

@@ -19,7 +19,6 @@ public class ExchangeInfo {
 	private Long serverTime;
 
 	private List<RateLimit> rateLimits;
-
 	// private List<String> exchangeFilters;
 
 	private List<SymbolInfo> symbols;

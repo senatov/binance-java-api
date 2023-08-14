@@ -32,7 +32,6 @@ public class AggTradesCacheExample {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance();
 		BinanceApiRestClient client = factory.newRestClient();
 		List<AggTrade> aggTrades = client.getAggTrades(symbol.toUpperCase());
-
 		aggTradesCache = new HashMap<>();
 		for (AggTrade aggTrade : aggTrades) {
 			aggTradesCache.put(aggTrade.getAggregatedTradeId(), aggTrade);
@@ -45,11 +44,10 @@ public class AggTradesCacheExample {
 	private void startAggTradesEventStreaming(String symbol) {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance();
 		BinanceApiWebSocketClient client = factory.newWebSocketClient();
-
 		client.onAggTradeEvent(symbol.toLowerCase(), response -> {
 			Long aggregatedTradeId = response.getAggregatedTradeId();
 			AggTrade updateAggTrade = aggTradesCache.get(aggregatedTradeId);
-			if (updateAggTrade == null) {
+			if (null == updateAggTrade) {
 				// new agg trade
 				updateAggTrade = new AggTrade();
 			}
@@ -59,7 +57,6 @@ public class AggTradesCacheExample {
 			updateAggTrade.setFirstBreakdownTradeId(response.getFirstBreakdownTradeId());
 			updateAggTrade.setLastBreakdownTradeId(response.getLastBreakdownTradeId());
 			updateAggTrade.setBuyerMaker(response.isBuyerMaker());
-
 			// Store the updated agg trade in the cache
 			aggTradesCache.put(aggregatedTradeId, updateAggTrade);
 			System.out.println(updateAggTrade);

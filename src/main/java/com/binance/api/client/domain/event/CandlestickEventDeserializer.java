@@ -19,14 +19,11 @@ public class CandlestickEventDeserializer extends JsonDeserializer<CandlestickEv
 	public CandlestickEvent deserialize(JsonParser jp, DeserializationContext ctx) throws IOException {
 		ObjectCodec oc = jp.getCodec();
 		JsonNode node = oc.readTree(jp);
-
 		CandlestickEvent candlestickEvent = new CandlestickEvent();
-
 		// Parse header
 		candlestickEvent.setEventType(node.get("e").asText());
 		candlestickEvent.setEventTime(node.get("E").asLong());
 		candlestickEvent.setSymbol(node.get("s").asText());
-
 		// Parse candlestick data
 		JsonNode candlestickNode = node.get("k");
 		candlestickEvent.setOpenTime(candlestickNode.get("t").asLong());
@@ -44,7 +41,6 @@ public class CandlestickEventDeserializer extends JsonDeserializer<CandlestickEv
 		candlestickEvent.setQuoteAssetVolume(candlestickNode.get("q").asText());
 		candlestickEvent.setTakerBuyBaseAssetVolume(candlestickNode.get("V").asText());
 		candlestickEvent.setTakerBuyQuoteAssetVolume(candlestickNode.get("Q").asText());
-
 		return candlestickEvent;
 	}
 }

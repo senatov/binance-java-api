@@ -54,7 +54,6 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	public BinanceApiRestClientImpl(String apiKey, String secret) {
 		binanceApiService = createService(BinanceApiService.class, apiKey, secret);
 	}
-
 	// General endpoints
 
 	@Override
@@ -77,7 +76,6 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 		return executeSync(binanceApiService
 				.getAllAssets(BinanceApiConfig.getAssetInfoApiBaseUrl() + "assetWithdraw/getAllAsset.html"));
 	}
-
 	// Market Data endpoints
 
 	@Override
@@ -145,7 +143,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	@Override
 	public NewOrderResponse newOrder(NewOrder order) {
 		Call<NewOrderResponse> call;
-		if (order.getQuoteOrderQty() == null) {
+		if (null == order.getQuoteOrderQty()) {
 			call = binanceApiService.newOrder(order.getSymbol(), order.getSide(), order.getType(),
 					order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(),
 					order.getStopPrice(), order.getIcebergQty(), order.getNewOrderRespType(), order.getRecvWindow(),
@@ -166,7 +164,6 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 				order.getStopPrice(), order.getIcebergQty(), order.getNewOrderRespType(), order.getRecvWindow(),
 				order.getTimestamp()));
 	}
-
 	// Account endpoints
 
 	@Override
@@ -289,7 +286,6 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 		return executeSync(binanceApiService.getDepositAddress(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
 				System.currentTimeMillis()));
 	}
-
 	// User stream endpoints
 
 	@Override

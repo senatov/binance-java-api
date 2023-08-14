@@ -31,12 +31,10 @@ public class BookTickerEvent {
 	private String askQuantity;
 
 	public BookTickerEvent() {
-		super();
 	}
 
 	public BookTickerEvent(long updateId, String symbol, String bidPrice, String bidQuantity, String askPrice,
 	                       String askQuantity) {
-		super();
 		this.updateId = updateId;
 		this.symbol = symbol;
 		this.bidPrice = bidPrice;
@@ -46,7 +44,6 @@ public class BookTickerEvent {
 	}
 
 	public BookTickerEvent(String symbol, String bidPrice, String bidQuantity, String askPrice, String askQuantity) {
-		super();
 		this.symbol = symbol;
 		this.bidPrice = bidPrice;
 		this.bidQuantity = bidQuantity;

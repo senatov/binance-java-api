@@ -35,7 +35,7 @@ public class AuthenticationInterceptor implements Interceptor {
 	private static String bodyToString(RequestBody request) {
 		try (Buffer buffer = new Buffer()) {
 			RequestBody copy = request;
-			if (copy != null) {
+			if (null != copy) {
 				copy.writeTo(buffer);
 			} else {
 				return "";
@@ -50,17 +50,14 @@ public class AuthenticationInterceptor implements Interceptor {
 	public Response intercept(Chain chain) throws IOException {
 		Request original = chain.request();
 		Request.Builder newRequestBuilder = original.newBuilder();
-
-		boolean isApiKeyRequired = original.header(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY) != null;
-		boolean isSignatureRequired = original.header(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED) != null;
+		boolean isApiKeyRequired = null != original.header(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY);
+		boolean isSignatureRequired = null != original.header(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED);
 		newRequestBuilder.removeHeader(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY)
 				.removeHeader(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED);
-
 		// Endpoint requires sending a valid API-KEY
 		if (isApiKeyRequired || isSignatureRequired) {
 			newRequestBuilder.addHeader(BinanceApiConstants.API_KEY_HEADER, apiKey);
 		}
-
 		// Endpoint requires signing the payload
 		if (isSignatureRequired) {
 			String payload = original.url().query();
@@ -70,7 +67,6 @@ public class AuthenticationInterceptor implements Interceptor {
 				newRequestBuilder.url(signedUrl);
 			}
 		}
-
 		// Build new request after adding the necessary authentication information
 		Request newRequest = newRequestBuilder.build();
 		return chain.proceed(newRequest);
@@ -85,7 +81,7 @@ public class AuthenticationInterceptor implements Interceptor {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		if (null == o || getClass() != o.getClass())
 			return false;
 		AuthenticationInterceptor that = (AuthenticationInterceptor) o;
 		return Objects.equals(apiKey, that.apiKey) &&

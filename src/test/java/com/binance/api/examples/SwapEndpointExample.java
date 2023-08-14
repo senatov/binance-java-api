@@ -16,7 +16,6 @@ public class SwapEndpointExample {
 	public static String SECRET_KEY = "secret-key";
 
 	public static void main(String[] args) {
-
 		BinanceApiClientFactory binanceApiClientFactory = BinanceApiClientFactory.newInstance(API_KEY, SECRET_KEY);
 		BinanceApiSwapRestClient swapClient = binanceApiClientFactory.newSwapRestClient();
 		List<Pool> pools = swapClient.listAllSwapPools();

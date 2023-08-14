@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public enum TransferType {
 	SPOT_TO_MARGIN("1"), MARGIN_TO_SPOT("2");
 
-	private String value;
+	private final String value;
 
 	TransferType(String value) {
 		this.value = value;

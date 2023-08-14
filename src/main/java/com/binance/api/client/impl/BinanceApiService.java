@@ -59,7 +59,6 @@ import java.util.List;
  * Binance's REST API URL mappings and endpoint security configuration.
  */
 public interface BinanceApiService {
-
 	// General endpoints
 
 	@GET("/api/v1/ping")
@@ -73,7 +72,6 @@ public interface BinanceApiService {
 
 	@GET
 	Call<List<Asset>> getAllAssets(@Url String url);
-
 	// Market data endpoints
 
 	@GET("/api/v1/depth")
@@ -108,7 +106,6 @@ public interface BinanceApiService {
 
 	@GET("/api/v1/ticker/allBookTickers")
 	Call<List<BookTicker>> getBookTickers();
-
 	// Account endpoints
 
 	@Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
@@ -213,7 +210,6 @@ public interface BinanceApiService {
 	@Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
 	@GET("/sapi/v1/sub-account/transfer/subUserHistory")
 	Call<List<SubAccountTransfer>> getSubAccountTransfers(@Query("timestamp") Long timestamp);
-
 	// User stream endpoints
 
 	@Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
@@ -297,7 +293,6 @@ public interface BinanceApiService {
 	@Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
 	@PUT("/sapi/v1/userDataStream")
 	Call<Void> keepAliveMarginUserDataStream(@Query("listenKey") String listenKey);
-
 	// Binance Liquidity Swap Pool endpoints
 
 	@Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)

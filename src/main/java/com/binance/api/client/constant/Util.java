@@ -18,7 +18,6 @@ public final class Util {
 	public static final String BTC_TICKER = "BTC";
 
 	private Util() {
-
 	}
 
 	/**

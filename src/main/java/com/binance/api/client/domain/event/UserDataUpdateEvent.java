@@ -83,9 +83,9 @@ public class UserDataUpdateEvent {
 		ToStringBuilder sb = new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
 				.append("eventType", eventType)
 				.append("eventTime", eventTime);
-		if (eventType == UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE) {
+		if (UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE == eventType) {
 			sb.append("outboundAccountPositionUpdateEvent", outboundAccountPositionUpdateEvent);
-		} else if (eventType == UserDataUpdateEventType.BALANCE_UPDATE) {
+		} else if (UserDataUpdateEventType.BALANCE_UPDATE == eventType) {
 			sb.append("balanceUpdateEvent", balanceUpdateEvent);
 		} else {
 			sb.append("orderTradeUpdateEvent", orderTradeUpdateEvent);

@@ -22,7 +22,6 @@ public class AssetBalanceDeserializer extends JsonDeserializer<AssetBalance> {
 		String asset = node.get("a").asText();
 		String free = node.get("f").asText();
 		String locked = node.get("l").asText();
-
 		AssetBalance assetBalance = new AssetBalance();
 		assetBalance.setAsset(asset);
 		assetBalance.setFree(free);

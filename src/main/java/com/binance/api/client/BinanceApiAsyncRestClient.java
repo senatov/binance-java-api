@@ -33,7 +33,6 @@ import java.util.List;
  * Binance API facade, supporting asynchronous/non-blocking access Binance's REST API.
  */
 public interface BinanceApiAsyncRestClient {
-
 	// General endpoints
 
 	/**
@@ -55,7 +54,6 @@ public interface BinanceApiAsyncRestClient {
 	 * ALL supported assets and whether or not they can be withdrawn.
 	 */
 	void getAllAssets(BinanceApiCallback<List<Asset>> callback);
-
 	// Market Data endpoints
 
 	/**
@@ -163,7 +161,6 @@ public interface BinanceApiAsyncRestClient {
 	 * @param callback the callback that handles the response
 	 */
 	void getBookTickers(BinanceApiCallback<List<BookTicker>> callback);
-
 	// Account endpoints
 
 	/**
@@ -283,7 +280,6 @@ public interface BinanceApiAsyncRestClient {
 	 * @param callback the callback that handles the response and returns the deposit address
 	 */
 	void getDepositAddress(String asset, BinanceApiCallback<DepositAddress> callback);
-
 	// User stream endpoints
 
 	/**

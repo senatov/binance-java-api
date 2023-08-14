@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SymbolFilter {
-
 	// PRICE_FILTER
 
 	private FilterType filterType;
@@ -31,8 +30,6 @@ public class SymbolFilter {
 	 * Defines the intervals that a price/stopPrice can be increased/decreased by.
 	 */
 	private String tickSize;
-
-
 	// LOT_SIZE
 
 	/**
@@ -49,15 +46,12 @@ public class SymbolFilter {
 	 * Defines the intervals that a quantity/icebergQty can be increased/decreased by.
 	 */
 	private String stepSize;
-
 	// MIN_NOTIONAL
 
 	/**
 	 * Defines the minimum notional value allowed for an order on a symbol. An order's notional value is the price * quantity.
 	 */
 	private String minNotional;
-
-
 	// MAX_NUM_ALGO_ORDERS
 
 	/**

@@ -15,10 +15,8 @@ public class TotalAccountBalanceExample {
 	public static void main(String[] args) {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("YOUR_API_KEY", "YOUR_SECRET");
 		BinanceApiRestClient client = factory.newRestClient();
-
 		// Get account balances
 		Account account = client.getAccount(60_000L, System.currentTimeMillis());
-
 		// Get total account balance in BTC (spot only)
 		TotalAccountBalanceExample accountBalance = new TotalAccountBalanceExample();
 		double totalBalanceInBTC = accountBalance.getTotalAccountBalance(client, account);
@@ -38,7 +36,7 @@ public class TotalAccountBalanceExample {
 			double locked = Double.parseDouble(balance.getLocked());
 			String ticker = balance.getAsset() + Util.BTC_TICKER;
 			String tickerReverse = Util.BTC_TICKER + balance.getAsset();
-			if (free + locked != 0) {
+			if (0 != free + locked) {
 				if (Util.isFiatCurrency(balance.getAsset())) {
 					double price = Double.parseDouble(client.getPrice(tickerReverse).getPrice());
 					double amount = (free + locked) / price;
@@ -51,7 +49,6 @@ public class TotalAccountBalanceExample {
 
 			}
 		}
-
 		return totalBalance;
 
 	}

@@ -12,7 +12,6 @@ public class AllMarketTickersExample {
 	public static void main(String[] args) {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance();
 		BinanceApiWebSocketClient client = factory.newWebSocketClient();
-
 		client.onAllMarketTickersEvent(event -> {
 			System.out.println(event);
 		});

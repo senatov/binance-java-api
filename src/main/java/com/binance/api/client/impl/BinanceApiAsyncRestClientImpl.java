@@ -45,7 +45,6 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
 	public BinanceApiAsyncRestClientImpl(String apiKey, String secret) {
 		binanceApiService = createService(BinanceApiService.class, apiKey, secret);
 	}
-
 	// General endpoints
 
 	@Override
@@ -68,7 +67,6 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
 		binanceApiService.getAllAssets(BinanceApiConfig.getAssetInfoApiBaseUrl() + "assetWithdraw/getAllAsset.html")
 				.enqueue(new BinanceApiCallbackAdapter<>(callback));
 	}
-
 	// Market Data endpoints
 
 	@Override
@@ -133,7 +131,7 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
 
 	@Override
 	public void newOrder(NewOrder order, BinanceApiCallback<NewOrderResponse> callback) {
-		if (order.getQuoteOrderQty() == null) {
+		if (null == order.getQuoteOrderQty()) {
 			binanceApiService.newOrder(order.getSymbol(), order.getSide(), order.getType(),
 					order.getTimeInForce(), order.getQuantity(), order.getPrice(),
 					order.getNewClientOrderId(), order.getStopPrice(), order.getIcebergQty(), order.getNewOrderRespType(),
@@ -152,7 +150,6 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
 				order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(), order.getStopPrice(),
 				order.getIcebergQty(), order.getNewOrderRespType(), order.getRecvWindow(), order.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
 	}
-
 	// Account endpoints
 
 	@Override
@@ -231,7 +228,6 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
 		binanceApiService.getDepositAddress(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
 				.enqueue(new BinanceApiCallbackAdapter<>(callback));
 	}
-
 	// User stream endpoints
 
 	@Override

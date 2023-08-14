@@ -30,9 +30,7 @@ public class MarginAssetBalance {
 
 	public static MarginAssetBalance of(String asset) {
 		MarginAssetBalance marginAssetBalance = new MarginAssetBalance();
-
 		marginAssetBalance.setAsset(asset);
-
 		return marginAssetBalance;
 	}
 

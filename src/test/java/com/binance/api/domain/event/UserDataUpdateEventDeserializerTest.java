@@ -54,22 +54,17 @@ public class UserDataUpdateEventDeserializerTest {
 			UserDataUpdateEvent userDataUpdateEvent = mapper.readValue(orderUpdateEventJson, UserDataUpdateEvent.class);
 			assertEquals(userDataUpdateEvent.getEventType().getEventTypeId(), "executionReport");
 			assertEquals(userDataUpdateEvent.getEventTime(), 1L);
-
 			OrderTradeUpdateEvent orderTradeUpdateEvent = userDataUpdateEvent.getOrderTradeUpdateEvent();
 			assertEquals(orderTradeUpdateEvent.getSymbol(), "NEOETH");
 			assertEquals(orderTradeUpdateEvent.getNewClientOrderId(), "XXX");
-
 			assertEquals(orderTradeUpdateEvent.getSide(), OrderSide.BUY);
 			assertEquals(orderTradeUpdateEvent.getType(), OrderType.LIMIT);
 			assertEquals(orderTradeUpdateEvent.getTimeInForce(), TimeInForce.GTC);
-
 			assertEquals(orderTradeUpdateEvent.getOriginalQuantity(), "1000.00000000");
 			assertEquals(orderTradeUpdateEvent.getPrice(), "0.00010000");
-
 			assertEquals(orderTradeUpdateEvent.getExecutionType(), ExecutionType.CANCELED);
 			assertEquals(orderTradeUpdateEvent.getOrderStatus(), OrderStatus.CANCELED);
 			assertEquals(orderTradeUpdateEvent.getOrderRejectReason(), OrderRejectReason.NONE);
-
 			assertEquals(orderTradeUpdateEvent.getOrderId(), Long.valueOf(123456L));
 			assertEquals(orderTradeUpdateEvent.getOrderTradeTime(), Long.valueOf(1L));
 		} catch (IOException e) {

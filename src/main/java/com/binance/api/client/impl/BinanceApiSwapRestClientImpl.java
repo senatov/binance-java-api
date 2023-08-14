@@ -37,7 +37,7 @@ public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
 		List<Liquidity> liquidities = executeSync(binanceApiService.getPoolLiquidityInfo(poolId,
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
 				timestamp));
-		if (liquidities != null && !liquidities.isEmpty()) {
+		if (null != liquidities && !liquidities.isEmpty()) {
 			return liquidities.get(0);
 		}
 		return null;
@@ -82,7 +82,7 @@ public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
 				operationId,
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
 				timestamp));
-		if (records != null && !records.isEmpty()) {
+		if (null != records && !records.isEmpty()) {
 			return records.get(0);
 		}
 		return null;
@@ -112,7 +112,7 @@ public class BinanceApiSwapRestClientImpl implements BinanceApiSwapRestClient {
 		List<SwapHistory> history = executeSync(binanceApiService.getSwapHistory(swapId,
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
 				timestamp));
-		if (history != null && !history.isEmpty()) {
+		if (null != history && !history.isEmpty()) {
 			return history.get(0);
 		}
 		return null;

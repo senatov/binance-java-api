@@ -24,15 +24,12 @@ public class MarginOrdersExample {
 	public static void main(String[] args) {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("YOUR_API_KEY", "YOUR_SECRET");
 		BinanceApiMarginRestClient client = factory.newMarginRestClient();
-
 		// Getting list of open orders
 		List<Order> openOrders = client.getOpenOrders(new OrderRequest("LINKETH"));
 		System.out.println(openOrders);
-
 		// Get status of a particular order
 		Order order = client.getOrderStatus(new OrderStatusRequest("LINKETH", 751698L));
 		System.out.println(order);
-
 		// Canceling an order
 		try {
 			CancelOrderResponse cancelOrderResponse = client.cancelOrder(new CancelOrderRequest("LINKETH", 756762L));
@@ -40,7 +37,6 @@ public class MarginOrdersExample {
 		} catch (BinanceApiException e) {
 			System.out.println(e.getError().getMsg());
 		}
-
 		// Placing a real LIMIT order
 		MarginNewOrderResponse newOrderResponse = client.newOrder(limitBuy("LINKETH", TimeInForce.GTC, "1000", "0.0001").newOrderRespType(NewOrderResponseType.FULL));
 		System.out.println(newOrderResponse);

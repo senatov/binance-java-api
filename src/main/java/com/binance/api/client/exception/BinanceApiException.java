@@ -29,7 +29,6 @@ public class BinanceApiException extends RuntimeException {
 	 * Instantiates a new binance api exception.
 	 */
 	public BinanceApiException() {
-		super();
 	}
 
 	/**
@@ -69,7 +68,7 @@ public class BinanceApiException extends RuntimeException {
 
 	@Override
 	public String getMessage() {
-		if (error != null) {
+		if (null != error) {
 			return error.getMsg();
 		}
 		return super.getMessage();

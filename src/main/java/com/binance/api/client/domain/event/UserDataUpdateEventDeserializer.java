@@ -22,34 +22,28 @@ public class UserDataUpdateEventDeserializer extends JsonDeserializer<UserDataUp
 
 	@Override
 	public UserDataUpdateEvent deserialize(JsonParser jp, DeserializationContext ctx) throws IOException {
-
-		if (mapper == null) {
+		if (null == mapper) {
 			mapper = new ObjectMapper();
 		}
-
 		ObjectCodec oc = jp.getCodec();
 		JsonNode node = oc.readTree(jp);
 		String json = node.toString();
-
 		String eventTypeId = node.get("e").asText();
 		Long eventTime = node.get("E").asLong();
 		UserDataUpdateEventType userDataUpdateEventType = UserDataUpdateEventType.fromEventTypeId(eventTypeId);
-
 		UserDataUpdateEvent userDataUpdateEvent = new UserDataUpdateEvent();
 		userDataUpdateEvent.setEventType(userDataUpdateEventType);
 		userDataUpdateEvent.setEventTime(eventTime);
-
-		if (userDataUpdateEventType == UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE) {
+		if (UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE == userDataUpdateEventType) {
 			AccountUpdateEvent accountUpdateEvent = getUserDataUpdateEventDetail(json, AccountUpdateEvent.class, mapper);
 			userDataUpdateEvent.setOutboundAccountPositionUpdateEvent(accountUpdateEvent);
-		} else if (userDataUpdateEventType == UserDataUpdateEventType.BALANCE_UPDATE) {
+		} else if (UserDataUpdateEventType.BALANCE_UPDATE == userDataUpdateEventType) {
 			BalanceUpdateEvent balanceUpdateEvent = getUserDataUpdateEventDetail(json, BalanceUpdateEvent.class, mapper);
 			userDataUpdateEvent.setBalanceUpdateEvent(balanceUpdateEvent);
 		} else { // userDataUpdateEventType == UserDataUpdateEventType.ORDER_TRADE_UPDATE
 			OrderTradeUpdateEvent orderTradeUpdateEvent = getUserDataUpdateEventDetail(json, OrderTradeUpdateEvent.class, mapper);
 			userDataUpdateEvent.setOrderTradeUpdateEvent(orderTradeUpdateEvent);
 		}
-
 		return userDataUpdateEvent;
 	}
 

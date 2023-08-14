@@ -18,7 +18,7 @@ public class BinanceApiWebSocketListener<T> extends WebSocketListener {
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 	private final ObjectReader objectReader;
-	private BinanceApiCallback<T> callback;
+	private final BinanceApiCallback<T> callback;
 	private boolean closing = false;
 
 	public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, Class<T> eventClass) {

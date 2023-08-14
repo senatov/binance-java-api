@@ -78,13 +78,11 @@ public class ExchangeInfoDeserializerTest {
 			System.out.println(exchangeInfo);
 			assertEquals(exchangeInfo.getTimezone(), "UTC");
 			assertEquals((long) exchangeInfo.getServerTime(), 1508631584636L);
-
 			List<RateLimit> rateLimits = exchangeInfo.getRateLimits();
 			assertEquals(rateLimits.size(), 3);
 			testRateLimit(rateLimits.get(0), RateLimitType.REQUEST_WEIGHT, RateLimitInterval.MINUTE, 1200);
 			testRateLimit(rateLimits.get(1), RateLimitType.ORDERS, RateLimitInterval.SECOND, 10);
 			testRateLimit(rateLimits.get(2), RateLimitType.ORDERS, RateLimitInterval.DAY, 100000);
-
 			List<SymbolInfo> symbols = exchangeInfo.getSymbols();
 			assertEquals(symbols.size(), 1);
 			SymbolInfo symbolInfo = symbols.get(0);
@@ -96,22 +94,18 @@ public class ExchangeInfoDeserializerTest {
 			assertEquals((int) symbolInfo.getQuotePrecision(), 8);
 			assertEquals(symbolInfo.getOrderTypes(), Arrays.asList(OrderType.LIMIT, OrderType.MARKET));
 			assertFalse(symbolInfo.isIcebergAllowed());
-
 			List<SymbolFilter> symbolFilters = symbolInfo.getFilters();
 			assertEquals(symbolFilters.size(), 3);
-
 			SymbolFilter priceFilter = symbolFilters.get(0);
 			assertEquals(priceFilter.getFilterType(), FilterType.PRICE_FILTER);
 			assertEquals(priceFilter.getMinPrice(), "0.00000100");
 			assertEquals(priceFilter.getMaxPrice(), "100000.00000000");
 			assertEquals(priceFilter.getTickSize(), "0.00000100");
-
 			SymbolFilter lotSizeFilter = symbolFilters.get(1);
 			assertEquals(lotSizeFilter.getFilterType(), FilterType.LOT_SIZE);
 			assertEquals(lotSizeFilter.getMinQty(), "0.00100000");
 			assertEquals(lotSizeFilter.getMaxQty(), "100000.00000000");
 			assertEquals(lotSizeFilter.getStepSize(), "0.00100000");
-
 			SymbolFilter minNotionalFilter = symbolFilters.get(2);
 			assertEquals(minNotionalFilter.getFilterType(), FilterType.MIN_NOTIONAL);
 			assertEquals(minNotionalFilter.getMinNotional(), "0.00100000");

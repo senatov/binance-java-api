@@ -30,7 +30,6 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
 	public BinanceApiAsyncMarginRestClientImpl(String apiKey, String secret) {
 		binanceApiService = createService(BinanceApiService.class, apiKey, secret);
 	}
-
 	// Margin Account endpoints
 
 	@Override
@@ -75,7 +74,6 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
 	public void getMyTrades(String symbol, BinanceApiCallback<List<Trade>> callback) {
 		binanceApiService.getMyTrades(symbol, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()).enqueue(new BinanceApiCallbackAdapter<>(callback));
 	}
-
 	// user stream endpoints
 
 	@Override

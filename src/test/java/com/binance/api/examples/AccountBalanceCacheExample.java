@@ -40,12 +40,10 @@ public class AccountBalanceCacheExample {
 	private String initializeAssetBalanceCacheAndStreamSession() {
 		BinanceApiRestClient client = clientFactory.newRestClient();
 		Account account = client.getAccount();
-
 		accountBalanceCache = new TreeMap<>();
 		for (AssetBalance assetBalance : account.getBalances()) {
 			accountBalanceCache.put(assetBalance.getAsset(), assetBalance);
 		}
-
 		return client.startUserDataStream();
 	}
 
@@ -54,9 +52,8 @@ public class AccountBalanceCacheExample {
 	 */
 	private void startAccountBalanceEventStreaming(String listenKey) {
 		BinanceApiWebSocketClient client = clientFactory.newWebSocketClient();
-
 		client.onUserDataUpdateEvent(listenKey, response -> {
-			if (response.getEventType() == ACCOUNT_POSITION_UPDATE) {
+			if (ACCOUNT_POSITION_UPDATE == response.getEventType()) {
 				// Override cached asset balances
 				for (AssetBalance assetBalance : response.getOutboundAccountPositionUpdateEvent().getBalances()) {
 					accountBalanceCache.put(assetBalance.getAsset(), assetBalance);

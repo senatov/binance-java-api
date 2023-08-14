@@ -32,7 +32,6 @@ public class CandlesticksCacheExample {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance();
 		BinanceApiRestClient client = factory.newRestClient();
 		List<Candlestick> candlestickBars = client.getCandlestickBars(symbol.toUpperCase(), interval);
-
 		candlesticksCache = new TreeMap<>();
 		for (Candlestick candlestickBar : candlestickBars) {
 			candlesticksCache.put(candlestickBar.getOpenTime(), candlestickBar);
@@ -45,11 +44,10 @@ public class CandlesticksCacheExample {
 	private void startCandlestickEventStreaming(String symbol, CandlestickInterval interval) {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance();
 		BinanceApiWebSocketClient client = factory.newWebSocketClient();
-
 		client.onCandlestickEvent(symbol.toLowerCase(), interval, response -> {
 			Long openTime = response.getOpenTime();
 			Candlestick updateCandlestick = candlesticksCache.get(openTime);
-			if (updateCandlestick == null) {
+			if (null == updateCandlestick) {
 				// new candlestick
 				updateCandlestick = new Candlestick();
 			}
@@ -65,7 +63,6 @@ public class CandlesticksCacheExample {
 			updateCandlestick.setQuoteAssetVolume(response.getQuoteAssetVolume());
 			updateCandlestick.setTakerBuyQuoteAssetVolume(response.getTakerBuyQuoteAssetVolume());
 			updateCandlestick.setTakerBuyBaseAssetVolume(response.getTakerBuyQuoteAssetVolume());
-
 			// Store the updated candlestick in the cache
 			candlesticksCache.put(openTime, updateCandlestick);
 			System.out.println(updateCandlestick);

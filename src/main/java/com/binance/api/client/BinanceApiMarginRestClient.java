@@ -60,7 +60,6 @@ public interface BinanceApiMarginRestClient {
 	 * @return a list of trades
 	 */
 	List<Trade> getMyTrades(String symbol);
-
 	// User stream endpoints
 
 	/**

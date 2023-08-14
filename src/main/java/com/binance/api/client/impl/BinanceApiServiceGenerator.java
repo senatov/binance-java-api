@@ -61,11 +61,9 @@ public class BinanceApiServiceGenerator {
                 BinanceApiConfig.getStreamTestNetBaseUrl() :*/
 					BinanceApiConfig.getTestNetBaseUrl();
 		}
-
 		Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
 				.baseUrl(baseUrl)
 				.addConverterFactory(converterFactory);
-
 		if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(secret)) {
 			retrofitBuilder.client(sharedClient);
 		} else {
@@ -74,7 +72,6 @@ public class BinanceApiServiceGenerator {
 			OkHttpClient adaptedClient = sharedClient.newBuilder().addInterceptor(interceptor).build();
 			retrofitBuilder.client(adaptedClient);
 		}
-
 		Retrofit retrofit = retrofitBuilder.build();
 		return retrofit.create(serviceClass);
 	}

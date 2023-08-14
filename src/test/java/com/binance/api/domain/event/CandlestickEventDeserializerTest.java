@@ -45,7 +45,6 @@ public class CandlestickEventDeserializerTest {
 			assertEquals(candlestickEvent.getEventType(), "kline");
 			assertEquals(candlestickEvent.getEventTime(), 1L);
 			assertEquals(candlestickEvent.getSymbol(), "ETHBTC");
-
 			assertEquals((long) candlestickEvent.getOpenTime(), 1499404860000L);
 			assertEquals(candlestickEvent.getOpen(), "0.10278577");
 			assertEquals(candlestickEvent.getHigh(), "0.10278712");
