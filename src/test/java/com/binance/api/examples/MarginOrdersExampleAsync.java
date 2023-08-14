@@ -18,15 +18,15 @@ public class MarginOrdersExampleAsync {
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("YOUR_API_KEY", "YOUR_SECRET");
 		BinanceApiAsyncMarginRestClient client = factory.newAsyncMarginRestClient();
 		// Getting list of open orders
-		client.getOpenOrders(new OrderRequest("LINKETH"), response -> System.out.println(response));
+		client.getOpenOrders(new OrderRequest("LINKETH"), System.out::println);
 		// Get status of a particular order
 		client.getOrderStatus(new OrderStatusRequest("LINKETH", 745262L),
-				response -> System.out.println(response));
+				System.out::println);
 		// Canceling an order
 		client.cancelOrder(new CancelOrderRequest("LINKETH", 756703L),
-				response -> System.out.println(response));
+				System.out::println);
 		// Placing a real LIMIT order
 		client.newOrder(limitBuy("LINKETH", TimeInForce.GTC, "1000", "0.0001"),
-				response -> System.out.println(response));
+				System.out::println);
 	}
 }

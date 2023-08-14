@@ -1,8 +1,6 @@
 package com.binance.api.client.constant;
 
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -13,7 +11,7 @@ public final class Util {
 	/**
 	 * List of fiat currencies.
 	 */
-	public static final List<String> FIAT_CURRENCY = Collections.unmodifiableList(Arrays.asList("USDT", "BUSD", "PAX", "TUSD", "USDC", "NGN", "RUB", "USDS", "TRY"));
+	public static final List<String> FIAT_CURRENCY = List.of("USDT", "BUSD", "PAX", "TUSD", "USDC", "NGN", "RUB", "USDS", "TRY");
 
 	public static final String BTC_TICKER = "BTC";
 
@@ -25,8 +23,9 @@ public final class Util {
 	 */
 	public static boolean isFiatCurrency(String symbol) {
 		for (String fiat : FIAT_CURRENCY) {
-			if (symbol.equals(fiat))
+			if (symbol.equals(fiat)) {
 				return true;
+			}
 		}
 		return false;
 	}

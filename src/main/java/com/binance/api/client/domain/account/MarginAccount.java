@@ -1,10 +1,11 @@
 package com.binance.api.client.domain.account;
 
-import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
+
+import static com.binance.api.client.constant.BinanceApiConstants.TO_STRING_BUILDER_STYLE;
 
 /**
  * Account information.
@@ -107,7 +108,7 @@ public class MarginAccount {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+		return new ToStringBuilder(this, TO_STRING_BUILDER_STYLE)
 				.append("borrowEnabled", borrowEnabled)
 				.append("marginLevel", marginLevel)
 				.append("totalAssetOfBtc", totalAssetOfBtc)

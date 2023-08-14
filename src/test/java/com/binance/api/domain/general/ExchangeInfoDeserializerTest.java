@@ -27,51 +27,51 @@ public class ExchangeInfoDeserializerTest {
 
 	@Test
 	public void testExchangeInfoDeserialization() {
-		final String json = "{\n" +
-				"  \"timezone\": \"UTC\",\n" +
-				"  \"serverTime\": 1508631584636,\n" +
-				"  \"rateLimits\": [{\n" +
-				"      \"rateLimitType\": \"REQUEST_WEIGHT\",\n" +
-				"      \"interval\": \"MINUTE\",\n" +
-				"      \"limit\": 1200\n" +
-				"    },\n" +
-				"    {\n" +
-				"      \"rateLimitType\": \"ORDERS\",\n" +
-				"      \"interval\": \"SECOND\",\n" +
-				"      \"limit\": 10\n" +
-				"    },\n" +
-				"    {\n" +
-				"      \"rateLimitType\": \"ORDERS\",\n" +
-				"      \"interval\": \"DAY\",\n" +
-				"      \"limit\": 100000\n" +
-				"    }\n" +
-				"  ],\n" +
-				"  \"exchangeFilters\": [],\n" +
-				"  \"symbols\": [{\n" +
-				"    \"symbol\": \"ETHBTC\",\n" +
-				"    \"status\": \"TRADING\",\n" +
-				"    \"baseAsset\": \"ETH\",\n" +
-				"    \"baseAssetPrecision\": 8,\n" +
-				"    \"quoteAsset\": \"BTC\",\n" +
-				"    \"quotePrecision\": 8,\n" +
-				"    \"orderTypes\": [\"LIMIT\", \"MARKET\"],\n" +
-				"    \"icebergAllowed\": false,\n" +
-				"    \"filters\": [{\n" +
-				"      \"filterType\": \"PRICE_FILTER\",\n" +
-				"      \"minPrice\": \"0.00000100\",\n" +
-				"      \"maxPrice\": \"100000.00000000\",\n" +
-				"      \"tickSize\": \"0.00000100\"\n" +
-				"    }, {\n" +
-				"      \"filterType\": \"LOT_SIZE\",\n" +
-				"      \"minQty\": \"0.00100000\",\n" +
-				"      \"maxQty\": \"100000.00000000\",\n" +
-				"      \"stepSize\": \"0.00100000\"\n" +
-				"    }, {\n" +
-				"      \"filterType\": \"MIN_NOTIONAL\",\n" +
-				"      \"minNotional\": \"0.00100000\"\n" +
-				"    }]\n" +
-				"  }]" +
-				"}";
+		final String json = """
+				{
+				  "timezone": "UTC",
+				  "serverTime": 1508631584636,
+				  "rateLimits": [{
+				      "rateLimitType": "REQUEST_WEIGHT",
+				      "interval": "MINUTE",
+				      "limit": 1200
+				    },
+				    {
+				      "rateLimitType": "ORDERS",
+				      "interval": "SECOND",
+				      "limit": 10
+				    },
+				    {
+				      "rateLimitType": "ORDERS",
+				      "interval": "DAY",
+				      "limit": 100000
+				    }
+				  ],
+				  "exchangeFilters": [],
+				  "symbols": [{
+				    "symbol": "ETHBTC",
+				    "status": "TRADING",
+				    "baseAsset": "ETH",
+				    "baseAssetPrecision": 8,
+				    "quoteAsset": "BTC",
+				    "quotePrecision": 8,
+				    "orderTypes": ["LIMIT", "MARKET"],
+				    "icebergAllowed": false,
+				    "filters": [{
+				      "filterType": "PRICE_FILTER",
+				      "minPrice": "0.00000100",
+				      "maxPrice": "100000.00000000",
+				      "tickSize": "0.00000100"
+				    }, {
+				      "filterType": "LOT_SIZE",
+				      "minQty": "0.00100000",
+				      "maxQty": "100000.00000000",
+				      "stepSize": "0.00100000"
+				    }, {
+				      "filterType": "MIN_NOTIONAL",
+				      "minNotional": "0.00100000"
+				    }]
+				  }]}""";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			ExchangeInfo exchangeInfo = mapper.readValue(json, ExchangeInfo.class);

@@ -16,20 +16,21 @@ public class CandlestickDeserializerTest {
 
 	@Test
 	public void testCandlestickDeserializerTest() {
-		final String candlestickJson = "[\n" +
-				"    1499040000000,\n" +
-				"        \"0.01634790\",\n" +
-				"        \"0.80000000\",\n" +
-				"        \"0.01575800\",\n" +
-				"        \"0.01577100\",\n" +
-				"        \"148976.11427815\",\n" +
-				"        1499644799999,\n" +
-				"        \"2434.19055334\",\n" +
-				"        308,\n" +
-				"        \"1756.87402397\",\n" +
-				"        \"28.46694368\",\n" +
-				"        \"17928899.62484339\"\n" +
-				"        ]";
+		final String candlestickJson = """
+				[
+				    1499040000000,
+				        "0.01634790",
+				        "0.80000000",
+				        "0.01575800",
+				        "0.01577100",
+				        "148976.11427815",
+				        1499644799999,
+				        "2434.19055334",
+				        308,
+				        "1756.87402397",
+				        "28.46694368",
+				        "17928899.62484339"
+				        ]""";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Candlestick candlestick = mapper.readValue(candlestickJson, Candlestick.class);

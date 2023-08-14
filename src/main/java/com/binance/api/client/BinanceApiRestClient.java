@@ -93,8 +93,8 @@ public interface BinanceApiRestClient {
 	/**
 	 * Get compressed, aggregate trades. Trades that fill at the time, from the same order, with
 	 * the same price will have the quantity aggregated.
-	 * If both <code>startTime</code> and <code>endTime</code> are sent, <code>limit</code>should not
-	 * be sent AND the distance between <code>startTime</code> and <code>endTime</code> must be less than 24 hours.
+	 * If both {@code startTime} and <code>endTime</code> are sent, <code>limit</code>should not
+	 * be sent AND the distance between {@code startTime} and <code>endTime</code> must be less than 24 hours.
 	 *
 	 * @param symbol symbol to aggregate (mandatory)
 	 * @param fromId ID to get aggregate trades from INCLUSIVE (optional)
@@ -106,7 +106,7 @@ public interface BinanceApiRestClient {
 	List<AggTrade> getAggTrades(String symbol, String fromId, Integer limit, Long startTime, Long endTime);
 
 	/**
-	 * Return the most recent aggregate trades for <code>symbol</code>
+	 * Return the most recent aggregate trades for {@code symbol}
 	 *
 	 * @see #getAggTrades(String, String, Integer, Long, Long)
 	 */
@@ -149,7 +149,7 @@ public interface BinanceApiRestClient {
 	List<TickerPrice> getAllPrices();
 
 	/**
-	 * Get latest price for <code>symbol</code>.
+	 * Get latest price for {@code symbol}.
 	 *
 	 * @param symbol ticker symbol (e.g. ETHBTC)
 	 */

@@ -79,10 +79,12 @@ public class AuthenticationInterceptor implements Interceptor {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (null == o || getClass() != o.getClass())
+		}
+		if (null == o || getClass() != o.getClass()) {
 			return false;
+		}
 		AuthenticationInterceptor that = (AuthenticationInterceptor) o;
 		return Objects.equals(apiKey, that.apiKey) &&
 				Objects.equals(secret, that.secret);

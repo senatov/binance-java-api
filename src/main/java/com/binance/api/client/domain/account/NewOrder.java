@@ -106,7 +106,7 @@ public class NewOrder {
 	}
 
 	/**
-	 * Places a MARKET buy order for the given <code>quantity</code>.
+	 * Places a MARKET buy order for the given {@code quantity}.
 	 *
 	 * @return a new order which is pre-configured with MARKET as the order type and BUY as the order side.
 	 */
@@ -115,7 +115,7 @@ public class NewOrder {
 	}
 
 	/**
-	 * Places a MARKET sell order for the given <code>quantity</code>.
+	 * Places a MARKET sell order for the given {@code quantity}.
 	 *
 	 * @return a new order which is pre-configured with MARKET as the order type and SELL as the order side.
 	 */
@@ -124,7 +124,7 @@ public class NewOrder {
 	}
 
 	/**
-	 * Places a LIMIT buy order for the given <code>quantity</code> and <code>price</code>.
+	 * Places a LIMIT buy order for the given <code>quantity</code> and {@code price}.
 	 *
 	 * @return a new order which is pre-configured with LIMIT as the order type and BUY as the order side.
 	 */
@@ -133,7 +133,7 @@ public class NewOrder {
 	}
 
 	/**
-	 * Places a LIMIT sell order for the given <code>quantity</code> and <code>price</code>.
+	 * Places a LIMIT sell order for the given {@code quantity} and <code>price</code>.
 	 *
 	 * @return a new order which is pre-configured with LIMIT as the order type and SELL as the order side.
 	 */

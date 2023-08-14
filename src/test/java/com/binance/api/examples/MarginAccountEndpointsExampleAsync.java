@@ -19,9 +19,7 @@ public class MarginAccountEndpointsExampleAsync {
 			System.out.println(marginAccount.getMarginLevel());
 		});
 		// Get list of trades
-		client.getMyTrades("NEOETH", myTrades -> {
-			System.out.println(myTrades);
-		});
+		client.getMyTrades("NEOETH", System.out::println);
 		// Transfer, borrow, repay
 		client.transfer("USDT", "1", TransferType.SPOT_TO_MARGIN, transaction -> System.out.println(transaction.getTranId()));
 		client.borrow("USDT", "1", transaction -> System.out.println(transaction.getTranId()));

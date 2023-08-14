@@ -1,5 +1,7 @@
 package com.binance.api.client.config;
 
+import static java.lang.String.format;
+
 /**
  * Configuration used for Binance operations.
  */
@@ -28,7 +30,7 @@ public class BinanceApiConfig {
 	 * REST API base URL.
 	 */
 	public static String getApiBaseUrl() {
-		return String.format("https://api.%s", getBaseDomain());
+		return format("https://api.%s", getBaseDomain());
 	}
 
 	/**
@@ -53,27 +55,27 @@ public class BinanceApiConfig {
 	 * Streaming API base URL.
 	 */
 	public static String getStreamApiBaseUrl() {
-		return String.format("wss://stream.%s:9443/ws", getBaseDomain());
+		return format("wss://stream.%s:9443/ws", getBaseDomain());
 	}
 
 	/**
 	 * Asset info base URL.
 	 */
 	public static String getAssetInfoApiBaseUrl() {
-		return String.format("https://%s/", getBaseDomain());
+		return format("https://%s/", getBaseDomain());
 	}
 
 	/**
 	 * Spot Test Network API base URL.
 	 */
 	public static String getTestNetBaseUrl() {
-		return String.format("https://%s", TESTNET_DOMAIN);
+		return format("https://%s", TESTNET_DOMAIN);
 	}
 
 	/**
 	 * Streaming Spot Test Network base URL.
 	 */
 	public static String getStreamTestNetBaseUrl() {
-		return String.format("wss://%s/ws", TESTNET_DOMAIN);
+		return format("wss://%s/ws", TESTNET_DOMAIN);
 	}
 }

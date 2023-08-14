@@ -2,6 +2,8 @@ package com.binance.api.client.domain.general;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import static java.lang.String.valueOf;
+
 /**
  * Time of the server running Binance's REST API.
  */
@@ -19,6 +21,6 @@ public class ServerTime {
 
 	@Override
 	public String toString() {
-		return String.valueOf(serverTime);
+		return valueOf(serverTime);
 	}
 }

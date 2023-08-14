@@ -1,6 +1,5 @@
 package com.binance.api.client.domain.account;
 
-import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.OrderSide;
 import com.binance.api.client.domain.OrderStatus;
 import com.binance.api.client.domain.OrderType;
@@ -12,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.binance.api.client.constant.BinanceApiConstants.TO_STRING_BUILDER_STYLE;
 
 /**
  * Response returned when placing a new order on the system.
@@ -187,7 +188,7 @@ public class MarginNewOrderResponse {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+		return new ToStringBuilder(this, TO_STRING_BUILDER_STYLE)
 				.append("symbol", symbol)
 				.append("orderId", orderId)
 				.append("clientOrderId", clientOrderId)

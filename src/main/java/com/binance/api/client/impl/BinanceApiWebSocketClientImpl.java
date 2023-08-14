@@ -20,10 +20,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.String.format;
+
 /**
  * Binance API WebSocket client implementation using OkHttp.
  */
-public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient, Closeable {
+public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient {
 
 	private final OkHttpClient client;
 
@@ -35,7 +37,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 	public Closeable onDepthEvent(String symbols, BinanceApiCallback<DepthEvent> callback) {
 		String channel = Arrays.stream(symbols.split(","))
 				.map(String::trim)
-				.map(s -> String.format("%s@depth", s))
+				.map(s -> format("%s@depth", s))
 				.collect(Collectors.joining("/"));
 		return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, DepthEvent.class));
 	}
@@ -44,7 +46,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 	public Closeable onCandlestickEvent(String symbols, CandlestickInterval interval, BinanceApiCallback<CandlestickEvent> callback) {
 		String channel = Arrays.stream(symbols.split(","))
 				.map(String::trim)
-				.map(s -> String.format("%s@kline_%s", s, interval.getIntervalId()))
+				.map(s -> format("%s@kline_%s", s, interval.getIntervalId()))
 				.collect(Collectors.joining("/"));
 		return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, CandlestickEvent.class));
 	}
@@ -52,7 +54,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 	public Closeable onAggTradeEvent(String symbols, BinanceApiCallback<AggTradeEvent> callback) {
 		String channel = Arrays.stream(symbols.split(","))
 				.map(String::trim)
-				.map(s -> String.format("%s@aggTrade", s))
+				.map(s -> format("%s@aggTrade", s))
 				.collect(Collectors.joining("/"));
 		return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, AggTradeEvent.class));
 	}
@@ -65,14 +67,14 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 	public Closeable onTickerEvent(String symbols, BinanceApiCallback<TickerEvent> callback) {
 		String channel = Arrays.stream(symbols.split(","))
 				.map(String::trim)
-				.map(s -> String.format("%s@ticker", s))
+				.map(s -> format("%s@ticker", s))
 				.collect(Collectors.joining("/"));
 		return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, TickerEvent.class));
 	}
 
 	public Closeable onAllMarketTickersEvent(BinanceApiCallback<List<TickerEvent>> callback) {
 		final String channel = "!ticker@arr";
-		return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, new TypeReference<List<TickerEvent>>() {
+		return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, new TypeReference<>() {
 		}));
 	}
 
@@ -80,7 +82,7 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 	public Closeable onBookTickerEvent(String symbols, BinanceApiCallback<BookTickerEvent> callback) {
 		String channel = Arrays.stream(symbols.split(","))
 				.map(String::trim)
-				.map(s -> String.format("%s@bookTicker", s))
+				.map(s -> format("%s@bookTicker", s))
 				.collect(Collectors.joining("/"));
 		return createNewWebSocket(channel, new BinanceApiWebSocketListener<>(callback, BookTickerEvent.class));
 	}
@@ -93,12 +95,13 @@ public class BinanceApiWebSocketClientImpl implements BinanceApiWebSocketClient,
 	/**
 	 * @deprecated This method is no longer functional. Please use the returned {@link Closeable} from any of the other methods to close the web socket.
 	 */
+	@Deprecated
 	@Override
 	public void close() {
 	}
 
 	private Closeable createNewWebSocket(String channel, BinanceApiWebSocketListener<?> listener) {
-		String streamingUrl = String.format("%s/%s", BinanceApiConfig.useTestnetStreaming ? BinanceApiConfig.getStreamTestNetBaseUrl() : BinanceApiConfig.getStreamApiBaseUrl(), channel);
+		String streamingUrl = format("%s/%s", BinanceApiConfig.useTestnetStreaming ? BinanceApiConfig.getStreamTestNetBaseUrl() : BinanceApiConfig.getStreamApiBaseUrl(), channel);
 		Request request = new Request.Builder().url(streamingUrl).build();
 		WebSocket webSocket = client.newWebSocket(request, listener);
 		return () -> {

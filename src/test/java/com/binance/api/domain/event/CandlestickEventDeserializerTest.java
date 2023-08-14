@@ -10,35 +10,36 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
- * Tests that JSON responses from ta candlestick event are converted to the appropriate <code>CandlestickEvent</code> object.
+ * Tests that JSON responses from ta candlestick event are converted to the appropriate {@code CandlestickEvent} object.
  */
 public class CandlestickEventDeserializerTest {
 
 	@Test
 	public void testCandlestickEventDeserializer() {
-		String candlestickEventJson = "{\n" +
-				"        \"e\": \"kline\",\n" +
-				"        \"E\": 1,\n" +
-				"        \"s\": \"ETHBTC\",\n" +
-				"        \"k\": {\n" +
-				"        \"t\": 1499404860000,\n" +
-				"        \"T\": 1499404919999,\n" +
-				"        \"s\": \"ETHBTC\", \n" +
-				"        \"i\": \"1m\",\n" +
-				"        \"f\": 77462, \n" +
-				"        \"L\": 77465, \n" +
-				"        \"o\": \"0.10278577\", \n" +
-				"        \"c\": \"0.10278645\", \n" +
-				"        \"h\": \"0.10278712\", \n" +
-				"        \"l\": \"0.10278518\", \n" +
-				"        \"v\": \"17.47929838\", \n" +
-				"        \"n\": 4, \n" +
-				"        \"x\": false, \n" +
-				"        \"q\": \"1.79662878\", \n" +
-				"        \"V\": \"2.34879839\", \n" +
-				"        \"Q\": \"0.24142166\", \n" +
-				"        \"B\": \"13279784.01349473\"\n" +
-				"      }}";
+		String candlestickEventJson = """
+				{
+				        "e": "kline",
+				        "E": 1,
+				        "s": "ETHBTC",
+				        "k": {
+				        "t": 1499404860000,
+				        "T": 1499404919999,
+				        "s": "ETHBTC",\s
+				        "i": "1m",
+				        "f": 77462,\s
+				        "L": 77465,\s
+				        "o": "0.10278577",\s
+				        "c": "0.10278645",\s
+				        "h": "0.10278712",\s
+				        "l": "0.10278518",\s
+				        "v": "17.47929838",\s
+				        "n": 4,\s
+				        "x": false,\s
+				        "q": "1.79662878",\s
+				        "V": "2.34879839",\s
+				        "Q": "0.24142166",\s
+				        "B": "13279784.01349473"
+				      }}""";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			CandlestickEvent candlestickEvent = mapper.readValue(candlestickEventJson, CandlestickEvent.class);
